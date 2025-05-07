@@ -77,4 +77,13 @@ public class TarefaserviceImpl implements TarefaService {
         tarefa.setStatus(tarefaDto.status());
         return tarefaRepository.save(tarefa);
     }
+
+    @Override
+    public void excluirTarefa(Long tarefaId) {
+        Tarefa tarefa = buscarTarefa(tarefaId);
+        if (tarefaRepository.existsByTarefaPredecessora(tarefa)) {
+            throw new RuntimeException("A tarefa não pode ser excluída, pois é predecessora de outra.");
+        }
+        tarefaRepository.delete(tarefa);
+    }
 }

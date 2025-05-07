@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface ProjetoService {
     List<Projeto> listarProjetos(FiltroProjetoDto filtroProjetoDto);
+    Projeto buscarProjeto(Long projetoId);
     Projeto cadastrarProjeto(ProjetoDto projetoDto);
+    Projeto atualizarProjeto(Long projetoId, ProjetoDto projetoDto);
+
 }

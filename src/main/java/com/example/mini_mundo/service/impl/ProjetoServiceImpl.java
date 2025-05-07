@@ -1,10 +1,14 @@
 package com.example.mini_mundo.service.impl;
 
+import com.example.mini_mundo.dtos.FiltroProjetoDto;
 import com.example.mini_mundo.dtos.ProjetoDto;
 import com.example.mini_mundo.model.Projeto;
 import com.example.mini_mundo.repository.ProjetoRepository;
+import com.example.mini_mundo.repository.spec.ProjetoSpec;
 import com.example.mini_mundo.service.ProjetoService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProjetoServiceImpl implements ProjetoService {
@@ -12,6 +16,11 @@ public class ProjetoServiceImpl implements ProjetoService {
 
     public ProjetoServiceImpl(ProjetoRepository projetoRepository) {
         this.projetoRepository = projetoRepository;
+    }
+
+    @Override
+    public List<Projeto> listarProjetos(FiltroProjetoDto filtroProjetoDto) {
+        return projetoRepository.findAll(ProjetoSpec.filtrar(filtroProjetoDto.nome(), filtroProjetoDto.descricao(),filtroProjetoDto.status()));
     }
 
     @Override

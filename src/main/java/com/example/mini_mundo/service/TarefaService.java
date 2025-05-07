@@ -12,4 +12,5 @@ public interface TarefaService {
     Tarefa buscarTarefa(Long tarefaId);
     Tarefa cadastrarTarefa(TarefaDto tarefaDto);
     Tarefa atualizarTarefa(Long tarefaId, TarefaDto tarefaDto);
+    void excluirTarefa(Long tarefaId);
 }

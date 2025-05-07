@@ -32,4 +32,9 @@ public class TarefaController {
     public Tarefa cadastrarTarefa(@RequestBody @Valid TarefaDto tarefaDto) {
         return tarefaservice.cadastrarTarefa(tarefaDto);
     }
+
+    @PutMapping("/{id}")
+    public Tarefa atualizarTarefa(@PathVariable Long id, @RequestBody @Valid TarefaDto tarefaDto) {
+        return tarefaservice.atualizarTarefa(id, tarefaDto);
+    }
 }

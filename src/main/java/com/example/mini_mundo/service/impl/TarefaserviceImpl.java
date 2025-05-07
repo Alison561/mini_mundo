@@ -32,4 +32,25 @@ public class TarefaserviceImpl implements TarefaService {
         return tarefaRepository.findById(tarefaId)
                 .orElseThrow(() -> new NaoEcontradoException("Tarefa não encontrado"));
     }
+
+    @Override
+    @Transactional
+    public Tarefa cadastrarTarefa(TarefaDto tarefaDto) {
+        if (tarefaDto.dataInicio() != null && tarefaDto.dataFim() != null &&
+                tarefaDto.dataFim().isBefore(tarefaDto.dataInicio())) {
+            throw new RuntimeException("A data de fim não pode ser anterior à data de início.");
+        }
+        Tarefa tarefaPredecessora = null;
+        if (tarefaDto.tarefaPredecessoraId() != null) {
+            tarefaPredecessora = buscarTarefa(tarefaDto.tarefaPredecessoraId());
+        }
+        Tarefa tarefa = new Tarefa();
+        tarefa.setDescricao(tarefaDto.descricao());
+        tarefa.setProjeto(projetoServiceImpl.buscarProjeto(tarefaDto.projetoId()));
+        tarefa.setDataInicio(tarefaDto.dataInicio());
+        tarefa.setDataFim(tarefaDto.dataFim());
+        tarefa.setTarefaPredecessora(tarefaPredecessora);
+        tarefa.setStatus(tarefaDto.status());
+        return tarefaRepository.save(tarefa);
+    }
 }

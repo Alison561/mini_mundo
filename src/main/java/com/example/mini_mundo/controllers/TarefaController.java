@@ -1,12 +1,11 @@
 package com.example.mini_mundo.controllers;
 
 import com.example.mini_mundo.dtos.FiltroTarefaDto;
+import com.example.mini_mundo.dtos.TarefaDto;
 import com.example.mini_mundo.model.Tarefa;
 import com.example.mini_mundo.service.impl.TarefaserviceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +26,10 @@ public class TarefaController {
     @GetMapping
     public List<Tarefa> listarTarefas(FiltroTarefaDto filtroTarefaDto) {
         return tarefaservice.listarTarefas(filtroTarefaDto);
+    }
+
+    @PostMapping
+    public Tarefa cadastrarTarefa(@RequestBody @Valid TarefaDto tarefaDto) {
+        return tarefaservice.cadastrarTarefa(tarefaDto);
     }
 }

@@ -4,6 +4,8 @@ import com.example.mini_mundo.dtos.FiltroProjetoDto;
 import com.example.mini_mundo.dtos.ProjetoDto;
 import com.example.mini_mundo.model.Projeto;
 import com.example.mini_mundo.service.impl.ProjetoServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +37,11 @@ public class ProjetoController {
     @PutMapping("/{id}")
     public Projeto atualizarProjeto(@PathVariable Long id, @RequestBody @Valid ProjetoDto projetoDto) {
         return projetoService.atualizarProjeto(id, projetoDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public void excluirProjeto(@Parameter(description = "ID do projeto") @PathVariable Long id) {
+        projetoService.excluirProjeto(id);
     }
 
 }

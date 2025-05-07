@@ -11,5 +11,5 @@ public interface ProjetoService {
     Projeto buscarProjeto(Long projetoId);
     Projeto cadastrarProjeto(ProjetoDto projetoDto);
     Projeto atualizarProjeto(Long projetoId, ProjetoDto projetoDto);
-
+    void excluirProjeto(Long projetoId);
 }

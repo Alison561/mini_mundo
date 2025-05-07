@@ -57,4 +57,13 @@ public class ProjetoServiceImpl implements ProjetoService {
         projeto.setOrcamento(projetoDto.orcamento());
         return projetoRepository.save(projeto);
     }
+
+    @Override
+    public void excluirProjeto(Long projetoId) {
+        Projeto projeto = buscarProjeto(projetoId);
+        if (!projeto.getTarefas().isEmpty()){
+            throw new RuntimeException("O projeto não pode ser excluída, pois tem tarefas vinculadas.");
+        }
+        projetoRepository.delete(projeto);
+    }
 }

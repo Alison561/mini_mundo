@@ -10,4 +10,5 @@ public interface TarefaService {
 
     List<Tarefa> listarTarefas(FiltroTarefaDto filtroTarefaDto);
     Tarefa buscarTarefa(Long tarefaId);
+    Tarefa cadastrarTarefa(TarefaDto tarefaDto);
 }

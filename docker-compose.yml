@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build: ./
     image: mini-mundo
     container_name: mini-mundo
     depends_on:
@@ -11,11 +11,6 @@ services:
       - "8080:8080"
     networks:
       - app-network
-    environment:
-      DB_HOST: db
-      DB_NAME: mini_mundo
-      DB_USER: postgres
-      DB_PASSWORD: postgres
 
   db:
     image: postgres:17
@@ -24,16 +19,11 @@ services:
     environment:
       POSTGRES_DB: mini_mundo
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: 123
     ports:
       - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     networks:
       - app-network
-
-volumes:
-  postgres-data:
 
 networks:
   app-network:
